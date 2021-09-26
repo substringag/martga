@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  database:
+    container_name: 'martga-database'
+    image: 'postgres:12.5'
+    hostname: 'martga-database'
+    ports:
+      - '5432:5432'
+    env_file:
+      - database.env
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    expose:
+      - '5432'
+  minio:
+    image: minio/minio
+    container_name: martga-s3
+    user: '1000:1000'
+    volumes:
+      - './models/s3:/data'
+    ports:
+      - '9000:9000'
+    env_file:
+      - .env
+    entrypoint:
+      - minio
+      - server
+      - /data
+volumes:
+  database-data:
