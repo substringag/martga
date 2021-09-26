@@ -8,7 +8,7 @@ services:
     ports:
       - '5432:5432'
     env_file:
-      - database.env
+      - .env
     volumes:
       - database-data:/var/lib/postgresql/data/
     expose:
@@ -18,7 +18,7 @@ services:
     container_name: martga-s3
     user: '1000:1000'
     volumes:
-      - './models/s3:/data'
+      - './storage/s3:/data'
     ports:
       - '9000:9000'
     env_file:
