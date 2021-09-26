@@ -11,6 +11,10 @@ def covid19_switzerland(context):
     rows = [row for row in csv.DictReader(lines)]
     context.log.info(f"Found {len(rows)} rows")
 
+    file = open('../transformation/data/covid19_switzerland.csv', 'w')
+    file.write(response.text)
+    file.close()
+
     return rows
 
 
